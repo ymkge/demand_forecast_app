@@ -1,25 +1,21 @@
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 import joblib
-import os
+
+# 設定ファイルからパスをインポート
+from config import DATA_PATH, MODEL_PATH
 
 def train_model():
     """
-    Trains the model and saves it to model.pkl.
+    Reads data, trains the model, and saves it to the path specified in config.
     """
-    # Define paths relative to the script location
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    data_path = os.path.join(dir_path, 'sample_data.csv')
-    model_path = os.path.join(dir_path, 'model.pkl')
-
     # Load data
-    data = pd.read_csv(data_path)
+    data = pd.read_csv(DATA_PATH)
 
     # Feature Engineering: One-hot encode categorical variable
     data_encoded = pd.get_dummies(data, columns=['day_of_week'])
 
     # Define features (X) and target (y)
-    # Exclude non-feature columns
     features = [col for col in data_encoded.columns if col not in ['date', 'sales']]
     target = 'sales'
 
@@ -35,8 +31,8 @@ def train_model():
         'model': model,
         'columns': features
     }
-    joblib.dump(model_payload, model_path)
-    print(f"Model trained and saved as {model_path}")
+    joblib.dump(model_payload, MODEL_PATH)
+    print(f"Model trained and saved as {MODEL_PATH}")
 
 if __name__ == '__main__':
     train_model()

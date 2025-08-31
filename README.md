@@ -153,5 +153,3 @@ Web UI (`http://127.0.0.1:8000`) を開き、以前と同じ値を入力して�
 
 - **Build Command**: `pip install -r requirements.txt`
 - **Start Command**: `gunicorn -w 4 -k uvicorn.workers.UvicornWorker app:app`
-
-```

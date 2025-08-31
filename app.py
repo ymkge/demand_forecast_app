@@ -2,20 +2,18 @@ import joblib
 import pandas as pd
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-import os
-from train import train_model # Import the training function
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
-# Get the directory of the current script
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "model.pkl")
+# プロジェクト設定と学習済みモデルのトレーニング関数をインポート
+from config import MODEL_PATH, STATIC_DIR
+from train import train_model
 
 # Initialize FastAPI app
 app = FastAPI(title="Demand Forecast API")
 
 # Mount the static directory to serve frontend files
-app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 # --- Model Loading ---
@@ -24,12 +22,12 @@ model_payload = None
 def load_model():
     """Loads the model from disk into the global `model_payload`."""
     global model_payload
-    if os.path.exists(MODEL_PATH):
+    if MODEL_PATH.exists():
         model_payload = joblib.load(MODEL_PATH)
         print("Model loaded successfully.")
     else:
         model_payload = None
-        print("Model file not found. Train the model by calling the /train endpoint.")
+        print(f"Model file not found at {MODEL_PATH}. Train the model by calling the /train endpoint.")
 
 # Load the model on application startup
 load_model()
@@ -48,7 +46,7 @@ class PredictionOutput(BaseModel):
 @app.get("/", response_class=FileResponse, tags=["Frontend"])
 def read_root():
     """Serves the frontend's index.html file."""
-    return os.path.join(BASE_DIR, "static/index.html")
+    return STATIC_DIR / "index.html"
 
 @app.get("/health", tags=["Health"])
 def health_check():
