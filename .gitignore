@@ -1,0 +1,23 @@
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.venv/
+env/
+.env/
+
+# OS-specific files
+.DS_Store
+
+# IDE/Editor directories
+.vscode/
+.idea/
+
+# Application-specific generated files
+# The trained model should not be version-controlled
+model.pkl
+
+# Environment variables file
+.env

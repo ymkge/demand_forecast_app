@@ -4,6 +4,8 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import os
 from train import train_model # Import the training function
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
 # Get the directory of the current script
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -11,6 +13,10 @@ MODEL_PATH = os.path.join(BASE_DIR, "model.pkl")
 
 # Initialize FastAPI app
 app = FastAPI(title="Demand Forecast API")
+
+# Mount the static directory to serve frontend files
+app.mount("/static", StaticFiles(directory=os.path.join(BASE_DIR, "static")), name="static")
+
 
 # --- Model Loading ---
 model_payload = None
@@ -38,6 +44,12 @@ class PredictionOutput(BaseModel):
     predicted_sales: float
 
 # --- API Endpoints ---
+
+@app.get("/", response_class=FileResponse, tags=["Frontend"])
+def read_root():
+    """Serves the frontend's index.html file."""
+    return os.path.join(BASE_DIR, "static/index.html")
+
 @app.get("/health", tags=["Health"])
 def health_check():
     """Health check endpoint."""

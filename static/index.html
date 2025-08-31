@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>需要予測アプリ</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>需要予測アプリ</h1>
+        <form id="predict-form">
+            <div class="form-group">
+                <label for="ad_spend">広告費 (円)</label>
+                <input type="number" id="ad_spend" name="ad_spend" required>
+            </div>
+            <div class="form-group">
+                <label for="temperature">気温 (°C)</label>
+                <input type="number" id="temperature" name="temperature" step="0.1" required>
+            </div>
+            <div class="form-group">
+                <label for="day_of_week">曜日</label>
+                <select id="day_of_week" name="day_of_week" required>
+                    <option value="Sunday">日曜日</option>
+                    <option value="Monday">月曜日</option>
+                    <option value="Tuesday">火曜日</option>
+                    <option value="Wednesday">水曜日</option>
+                    <option value="Thursday">木曜日</option>
+                    <option value="Friday">金曜日</option>
+                    <option value="Saturday">土曜日</option>
+                </select>
+            </div>
+            <button type="submit">予測する</button>
+        </form>
+        <div id="result-container">
+            <h2>予測結果</h2>
+            <p id="result-text">ここに予測された販売数が表示されます。</p>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>
