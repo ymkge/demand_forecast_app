@@ -1,4 +1,5 @@
 # 需要予測API
+<img width="517" height="670" alt="スクリーンショット 2025-08-31 23 30 51" src="https://github.com/user-attachments/assets/2142cf50-677f-449a-90e2-4b03a8214b5d" />
 
 これは、FastAPIとscikit-learnを使用して構築されたシンプルな需要予測アプリケーションです。過去の販売データに基づいて、将来の販売数を予測します。
 
