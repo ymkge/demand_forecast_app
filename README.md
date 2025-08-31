@@ -1,5 +1,4 @@
 # 需要予測API
-<img width="517" height="670" alt="スクリーンショット 2025-08-31 23 30 51" src="https://github.com/user-attachments/assets/2142cf50-677f-449a-90e2-4b03a8214b5d" />
 
 これは、FastAPIとscikit-learnを使用して構築されたシンプルな需要予測アプリケーションです。過去の販売データに基づいて、将来の販売数を予測します。
 
@@ -16,6 +15,24 @@
 - **Frontend**: HTML, CSS, JavaScript
 - **ML/Data**: scikit-learn, pandas, numpy
 - **Server**: Uvicorn, Gunicorn
+
+---
+
+## プロジェクト構成
+
+主要なファイルとその役割は以下の通りです。
+
+```
+demand_forecast_app/
+├── static/           # フロントエンドファイル (HTML, CSS, JS)
+├── app.py            # FastAPIアプリケーション本体 (APIエンドポイント定義)
+├── train.py          # モデルを学習するためのスクリプト
+├── config.py         # ファイルパスなど、プロジェクト全体の設定を管理
+├── sample_data.csv   # モデル学習用のサンプルデータ
+├── model.pkl         # train.pyによって生成される学習済みモデル
+├── requirements.txt  # 依存ライブラリ
+└── README.md         # このファイル
+```
 
 ---
 
@@ -87,6 +104,13 @@ curl -X POST "http://127.0.0.1:8000/predict" \
   "temperature": 17,
   "day_of_week": "Thursday"
 }'
+```
+
+**応答例 (v2):**
+```json
+{
+  "predicted_sales": 229.08510575340713
+}
 ```
 
 ---
