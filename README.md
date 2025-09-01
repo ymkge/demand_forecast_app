@@ -50,14 +50,14 @@ cd demand_forecast_app
 ### 2. 仮想環境の作成と有効化（推奨）
 
 ```bash
-# 仮想環境を作成
+# 仮想環境を作成(初回のみ)
 python3 -m venv venv
 
 # 仮想環境を有効化 (macOS / Linux)
 source venv/bin/activate
 ```
 
-### 3. 依存関係のインストール
+### 3. 依存関係のインストール(初回のみ)
 
 `requirements.txt`を使用して、必要なライブラリをインストールします。
 
